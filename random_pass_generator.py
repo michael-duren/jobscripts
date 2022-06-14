@@ -3,19 +3,17 @@
 # password ends in '!', starts with upper case letter, and contains numbers and lower case letters
 # military phonetics for reading password are also printed.
 
-import random, string
+import random, string, sys
 
-passLength = int(input('How many characters should the password be? '))
-
-# define password characters
-lcase = list(string.ascii_lowercase)
-ucase = list(string.ascii_uppercase)
-num = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-for i in range(0, 10):
-    lcase.append(str(i)) 
-
-# generate password
+# generate password funciton
 def gen_password(passLength):
+    # define password characters
+    lcase = list(string.ascii_lowercase)
+    ucase = list(string.ascii_uppercase)
+    num = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    for i in range(0, 10):
+        lcase.append(str(i)) 
+    # generate password
     password = ''
     password += random.choice(ucase)
     password += random.choice(num)
@@ -52,15 +50,27 @@ def gen_milp(password):
             
     return mil_ph
                 
+# main program loop
+
+while True:
+    print('press "q" at any time to quit.')
+    passLength = input('How many characters should the password be? ')
+    
+    if passLength.lower() == 'q':
+        sys.exit()
+    else:
+        passLength = int(passLength)
+    # call funtions
+
+    genpassword = gen_password(passLength)
+    phonetics = gen_milp(genpassword)
+
+    # print results
+
+    print("\n", genpassword, sep='')
+    print(phonetics + "\n")
+
             
-# call funtions
 
-genpassword = gen_password(passLength)
-phonetics = gen_milp(genpassword)
-
-# print results
-
-print(genpassword)
-print(phonetics)
 
        
